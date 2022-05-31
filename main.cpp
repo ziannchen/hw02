@@ -16,10 +16,10 @@ struct Node {
     void insert(int val) {
         auto node = std::make_unique<Node>(val);
 
-        node->next = std::move(prev->next);
-        node->prev = prev;
-        prev = node.get();
-        prev->next = std::move(node);
+        next->prev = node.get();
+        node->next = std::move(next);
+        node->prev = this;
+        next = std::move(node);
     }
 
     void erase() {
